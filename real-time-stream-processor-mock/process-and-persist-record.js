@@ -18,17 +18,12 @@ exports.handler = function (event, context, callback) {
 	event.Records.forEach(record => {
 
 		let payload = new Buffer(record.kinesis.data, 'base64').toString('ascii');
+		console.log('* payload -> type', typeof(payload));
 		
-		console.log('* payload', payload);
-		let x = JSON.parse(payload);
-		console.log('* payload -> JSON', x);
-		console.log('* payload -> JSON -> type', typeof(x));
-		let y = JSON.parse(x.body);
-		console.log('* payload.body -> JSON', y);
-		console.log('* payload.body -> JSON -> type', typeof(y));
-		
-		let activity = y;
-		console.log('* activity', activity);
+		let activity = JSON.parse(JSON.parse(payload).body);
+		console.log('* JSON.parse(payload)', JSON.parse(payload), typeof(JSON.parse(payload)));
+		console.log('* JSON.parse(payload).body', JSON.parse(payload).body, typeof(JSON.parse(payload).body));
+		console.log('* activity', activity, typeof(activity));
 
 		// Partition key and sort key should be non null values
 		if (activity.ip !== null && activity.timestamp !== null) {
