@@ -14,30 +14,26 @@ const AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function (event, context, callback) {
-	console.log('***', event);
 
 	event.Records.forEach(record => {
-		console.log('***', record);
-		console.log('***', record.kinesis.data);
 
-		let payload = JSON.parse(new Buffer(record.kinesis.data, 'base64').toString('ascii'));
-		console.log('***', payload);
+		let payload = new Buffer(record.kinesis.data, 'base64').toString('ascii');
+		let activity = JSON.parse(payload).body;
 
 		// Partition key and sort key should be non null values
 		if (payload.ip !== null && payload.datetime !== null) {
-			console.log('*** valid');
 
 			ddb.put({
 				TableName: 'click-stream-table',
 				Item: {
-					'IP': payload.ip,
-					'Timestamp': payload.timestamp,
-					'Browser': payload.browser,
-					'URL': payload.url,
-					'Referrer': payload.referrer,
-					'OS': payload.os,
-					'Country': payload.country,
-					'Language': payload.language
+					'IP': activity.ip,
+					'Timestamp': activity.timestamp,
+					'Browser': activity.browser,
+					'URL': activity.url,
+					'Referrer': activity.referrer,
+					'OS': activity.os,
+					'Country': activity.country,
+					'Language': activity.language
 				}
 			}, function (err, data) {
 				if (err) {
