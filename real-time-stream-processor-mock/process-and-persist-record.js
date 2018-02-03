@@ -17,12 +17,9 @@ exports.handler = function (event, context, callback) {
 
 	event.Records.forEach(record => {
 
-		let payload = new Buffer(record.kinesis.data, 'base64').toString('ascii');
-		console.log('* payload -> type', typeof(payload));
-		
-		let activity = JSON.parse(JSON.parse(payload).body);
-		console.log('* JSON.parse(payload)', JSON.parse(payload), typeof(JSON.parse(payload)));
-		console.log('* JSON.parse(payload).body', JSON.parse(payload).body, typeof(JSON.parse(payload).body));
+		let request = new Buffer(record.kinesis.data, 'base64').toString('ascii');
+		let body = JSON.parse(request).body;
+		let activity = JSON.parse(body);
 		console.log('* activity', activity, typeof(activity));
 
 		// Partition key and sort key should be non null values
