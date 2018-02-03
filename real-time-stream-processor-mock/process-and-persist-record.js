@@ -14,14 +14,18 @@ const AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function (event, context, callback) {
+	console.log('***', event);
 
 	event.Records.forEach(record => {
+		console.log('***', record);
+		console.log('***', record.kinesis.data);
 
 		let payload = JSON.parse(new Buffer(record.kinesis.data, 'base64').toString('ascii'));
-		console.log(payload);
+		console.log('***', payload);
 
 		// Partition key and sort key should be non null values
 		if (payload.ip !== null && payload.datetime !== null) {
+			console.log('*** valid');
 
 			ddb.put({
 				TableName: 'click-stream-table',
