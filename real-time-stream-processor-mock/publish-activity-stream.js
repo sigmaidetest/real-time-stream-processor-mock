@@ -17,6 +17,7 @@ exports.handler = function (event, context, callback) {
 
     // activity reported through API proxy
     let activity = JSON.stringify(event);
+    console.log(activity);
 
     kinesis.putRecord({
         Data: activity,
