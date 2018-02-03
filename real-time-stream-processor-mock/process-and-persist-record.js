@@ -20,8 +20,7 @@ exports.handler = function (event, context, callback) {
 		let payload = new Buffer(record.kinesis.data, 'base64').toString('ascii');
 		let activity = JSON.parse(payload).body;
 		console.log('* activity', activity);
-		console.log('* activity.ip', activity.ip);
-		console.log('* activity.timestamp', activity.timestamp);
+		console.log('* activity -> type', typeof(activity));
 
 		// Partition key and sort key should be non null values
 		if (activity.ip !== null && activity.timestamp !== null) {
