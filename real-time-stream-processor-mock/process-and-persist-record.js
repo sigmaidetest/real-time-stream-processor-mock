@@ -42,7 +42,7 @@ exports.handler = function (event, context, callback) {
 				}
 			});
 		} else {
-			callback(null, 'Missing required keys ip or datetime');
+			callback(null, 'Missing required keys ip and/or timestamp');
 		}
 
 	});
