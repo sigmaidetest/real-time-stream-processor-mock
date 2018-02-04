@@ -17,7 +17,7 @@ exports.handler = function (event, context, callback) {
 	console.log('Event:', event);
 
 	event.Records.forEach(record => {
-		console.log('Data:', record.Kinesis.data);
+		console.log('Data:', record.kinesis.data);
 		let request = JSON.parse(new Buffer(record.kinesis.data, 'base64').toString('ascii'));
 		let activity = JSON.parse(request);
 		console.log('Activity:', activity);
