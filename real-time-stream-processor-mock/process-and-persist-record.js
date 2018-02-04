@@ -15,7 +15,7 @@ const ddb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function (event, context, callback) {
     console.log('***** process-and-persist-record *****');
-    console.log('* event:', event, typrof(event));
+    console.log('* event:', event, typeof(event));
 
 	event.Records.forEach(record => {
 		console.log('* record', record, typeof(record));
