@@ -21,11 +21,9 @@ exports.handler = function (event, context, callback) {
 		console.log('* record', record, typeof(record));
 		console.log('* data', record.kinesis.data, typeof(record.kinesis.data));
 
-		let request = new Buffer(record.kinesis.data, 'base64').toString('ascii');
+		let request = JSON.parse(new Buffer(record.kinesis.data, 'base64').toString('ascii'));
 		console.log('* request', request, typeof(request));
-		let requestObj = JSON.parse(JSON.parse(request));
-		console.log('* requestObj', requestObj, typeof(requestObj));
-		let activity = JSON.parse(requestObj.body);
+		let activity = JSON.parse(request.body);
 		console.log('* activity', activity, typeof(activity));
 
 		console.log('* validity', activity.ip, activity.timestamp);
