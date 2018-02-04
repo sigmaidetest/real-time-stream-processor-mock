@@ -25,7 +25,7 @@ exports.handler = function (event, context, callback) {
 		console.log('* request', request, typeof(request));
 		let requestObj = JSON.parse(request);
 		console.log('* requestObj', requestObj, typeof(requestObj));
-		let activity = JSON.parse(requestObj);
+		let activity = JSON.parse(requestObj.body);
 		console.log('* activity', activity, typeof(activity));
 
 		console.log('* validity', activity.ip, activity.timestamp);
