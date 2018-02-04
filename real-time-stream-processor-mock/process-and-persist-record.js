@@ -18,7 +18,7 @@ exports.handler = function (event, context, callback) {
 	event.Records.forEach(record => {
 		let request = JSON.parse(new Buffer(record.kinesis.data, 'base64').toString('ascii'));
 		let activity = JSON.parse(request);
-		console.log('* activity:', activity, typeof (activity));
+		console.log('Activity:', activity, typeof (activity));
 
 		// Partition key and sort key should be non null values
 		if (activity.ip !== undefined && activity.timestamp !== undefined) {
@@ -37,11 +37,36 @@ exports.handler = function (event, context, callback) {
 				}
 			}, function (err, data) {
 				if (err) {
-					console.log('* response -> error:', err);
-					callback(err, 'Error in persisting record');
+					console.log('Response -> error:', err);
+					let response = {
+						'statusCode': err.statusCode,
+						'headers': {
+							'Access-Control-Allow-Origin': '*',
+							'Content-Type': 'application/json'
+						},
+						'body': {
+							'Code': err.code,
+							'Message': err.message
+						},
+						'isBase64Encoded': false
+					};
+					callback(null, response);
 				} else {
-					console.log('* response -> data:', data);
-					callback(null, data);
+					console.log('Response -> data:', data);
+					let response = {
+						'statusCode': 200,
+						'headers': {
+							'Access-Control-Allow-Origin': '*',
+							'Content-Type': 'application/json'
+						},
+						'body': {
+							'Code': 'PutRecordSuccessful',
+							'Message': 'Record was successfully put to stream click-stream',
+							'data': JSON.stringify(data)
+						},
+						'isBase64Encoded': false
+					};
+					callback(null, response);
 				}
 			});
 

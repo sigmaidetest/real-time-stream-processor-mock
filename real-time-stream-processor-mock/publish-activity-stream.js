@@ -17,7 +17,7 @@ exports.handler = function (event, context, callback) {
 
     // activity reported through API proxy
     let activity = JSON.stringify(event.body);
-    console.log('* activity:', activity, typeof(activity));
+    console.log('Activity:', activity);
 
     kinesis.putRecord({
         Data: activity,
@@ -25,7 +25,7 @@ exports.handler = function (event, context, callback) {
         StreamName: 'click-stream'
     }).promise()
         .then(data => {
-            console.log('* response -> data:', data);
+            console.log('Response -> data:', data);
             let response = {
                 'statusCode': 200,
                 'headers': {
@@ -42,7 +42,7 @@ exports.handler = function (event, context, callback) {
             callback(null, response);
         })
         .catch(err => {
-            console.log('* response -> error:', err);
+            console.log('Response -> error:', err);
             let response = {
                 'statusCode': err.statusCode,
                 'headers': {
