@@ -15,7 +15,7 @@ const kinesis = new AWS.Kinesis();
 
 exports.handler = function (event, context, callback) {
     console.log('***** publish-activity-stream *****');
-    console.log('* event:', event, typrof(event));
+    console.log('* event:', event, typeof(event));
 
     // activity reported through API proxy
     let activity = JSON.stringify(event);
