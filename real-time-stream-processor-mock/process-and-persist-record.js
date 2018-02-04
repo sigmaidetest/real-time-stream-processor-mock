@@ -14,11 +14,12 @@ let AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function (event, context, callback) {
+	console.log('Event:', event);
 
 	event.Records.forEach(record => {
 		let request = JSON.parse(new Buffer(record.kinesis.data, 'base64').toString('ascii'));
 		let activity = JSON.parse(request);
-		console.log('Activity:', activity, typeof (activity));
+		console.log('Activity:', activity);
 
 		// Partition key and sort key should be non null values
 		if (activity.ip !== undefined && activity.timestamp !== undefined) {
