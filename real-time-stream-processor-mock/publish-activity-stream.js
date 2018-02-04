@@ -16,7 +16,7 @@ const kinesis = new AWS.Kinesis();
 exports.handler = function (event, context, callback) {
 
     // activity reported through API proxy
-    let activity = JSON.stringify(event);
+    let activity = JSON.stringify(event.body);
     console.log('* activity:', activity, typeof(activity));
 
     kinesis.putRecord({
