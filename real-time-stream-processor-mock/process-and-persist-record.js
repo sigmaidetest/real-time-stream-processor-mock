@@ -14,17 +14,22 @@ const AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function (event, context, callback) {
+    console.log('***** process-and-persist-record *****');
+    console.log('* event:', event, typrof(event));
 
 	event.Records.forEach(record => {
-
-		console.log('* data', record.kinesis.data);
+		console.log('* record', record, typeof(record));
+		console.log('* data', record.kinesis.data, typeof(record.kinesis.data));
 
 		let request = new Buffer(record.kinesis.data, 'base64').toString('ascii');
+		console.log('* request', request, typeof(request));
 		let activity = JSON.parse(request);
 		console.log('* activity', activity, typeof(activity));
 
+		console.log('* validity', activity.ip, activity.timestamp);
 		// Partition key and sort key should be non null values
 		if (activity.ip !== null && activity.timestamp !== null) {
+			console.log('* url', activity.url, typeof(activity.url));
 
 			ddb.put({
 				TableName: 'click-stream-table',

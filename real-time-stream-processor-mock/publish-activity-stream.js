@@ -14,10 +14,12 @@ const AWS = require('aws-sdk');
 const kinesis = new AWS.Kinesis();
 
 exports.handler = function (event, context, callback) {
+    console.log('***** publish-activity-stream *****');
+    console.log('* event:', event, typrof(event));
 
     // activity reported through API proxy
-    let activity = JSON.stringify(event.body);
-    console.log('* activity:', activity);
+    let activity = JSON.stringify(event);
+    console.log('* activity:', activity, typeof(activity));
 
     kinesis.putRecord({
         Data: activity,
