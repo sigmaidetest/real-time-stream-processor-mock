@@ -15,7 +15,7 @@ const ddb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function (event, context, callback) {
     console.log('***** process-and-persist-record *****');
-    console.log('* event:', event, typeof(event));
+    console.log('* event', event, typeof(event));
 
 	event.Records.forEach(record => {
 		console.log('* record', record, typeof(record));
@@ -23,12 +23,14 @@ exports.handler = function (event, context, callback) {
 
 		let request = new Buffer(record.kinesis.data, 'base64').toString('ascii');
 		console.log('* request', request, typeof(request));
-		let activity = JSON.parse(request);
+		let requestObj = JSON.parse(request);
+		console.log('* requestObj', requestObj, typeof(requestObj));
+		let activity = JSON.parse(requestObj);
 		console.log('* activity', activity, typeof(activity));
 
 		console.log('* validity', activity.ip, activity.timestamp);
 		// Partition key and sort key should be non null values
-		if (activity.ip !== null && activity.timestamp !== null) {
+		if (activity.ip !== undefined && activity.timestamp !== undefined) {
 			console.log('* url', activity.url, typeof(activity.url));
 
 			ddb.put({
