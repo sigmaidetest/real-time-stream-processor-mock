@@ -23,7 +23,7 @@ exports.handler = function (event, context, callback) {
 
 		let request = new Buffer(record.kinesis.data, 'base64').toString('ascii');
 		console.log('* request', request, typeof(request));
-		let requestObj = JSON.parse(request);
+		let requestObj = JSON.parse(JSON.parse(request));
 		console.log('* requestObj', requestObj, typeof(requestObj));
 		let activity = JSON.parse(requestObj.body);
 		console.log('* activity', activity, typeof(activity));
