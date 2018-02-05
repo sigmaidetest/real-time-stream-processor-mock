@@ -14,7 +14,7 @@ const AWS = require('aws-sdk');
 const kinesis = new AWS.Kinesis();
 
 exports.handler = function (event, context, callback) {
-	console.debug('Event:', event);
+	console.log('Event:', event);
 
     // activity reported through API proxy
     let activity = JSON.stringify(event.body);
@@ -26,7 +26,7 @@ exports.handler = function (event, context, callback) {
         StreamName: 'click-stream'
     }).promise()
         .then(data => {
-            console.debug('Response -> data:', data);
+            console.log('Response -> data:', data);
             let response = {
                 'statusCode': 200,
                 'headers': {
@@ -35,7 +35,7 @@ exports.handler = function (event, context, callback) {
                 },
                 'body': JSON.stringify({
                     'Code': 'PutRecordSuccessful',
-                    'Message': 'Record was successfully put to stream click-stream',
+                    'Message': 'Record was successfully put to click-stream',
                     'Data': data
                 }),
                 'isBase64Encoded': false
@@ -43,7 +43,7 @@ exports.handler = function (event, context, callback) {
             callback(null, response);
         })
         .catch(err => {
-            console.debug('Response -> error:', err);
+            console.log('Response -> error:', err);
             let response = {
                 'statusCode': err.statusCode,
                 'headers': {
