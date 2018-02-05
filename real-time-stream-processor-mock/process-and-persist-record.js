@@ -1,15 +1,3 @@
-/*
- * SLAppForge Sigma. Integrated Development Environment for Serverless Computing
- *
- * Copyright (c) 2018 SLAppForge Lanka Private Limited. All Rights Reserved.
- * https://www.slappforge.com
- *
- * You may use this file in accordance with the License Agreement provided with the Software or, alternatively, 
- * in accordance with the terms contained in a written agreement between you and SLAppForge.
- *
- * If you have questions regarding the use of this file, please contact SLAppForge at info@slappforge.com
- */
-
 console.log('Loading function: Process and Persist Record...');
 
 const AWS = require('aws-sdk');
