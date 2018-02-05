@@ -10,11 +10,13 @@
  * If you have questions regarding the use of this file, please contact SLAppForge at info@slappforge.com
  */
 
+console.log('Loading function: Publish Activity Stream...');
+
 const AWS = require('aws-sdk');
 const kinesis = new AWS.Kinesis();
 
 exports.handler = function (event, context, callback) {
-	console.log('Event:', event);
+	console.log('Received event:', JSON.stringify(event, null, 2));
 
     // activity reported through API proxy
     let activity = JSON.stringify(event.body);
