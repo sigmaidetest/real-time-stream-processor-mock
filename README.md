@@ -1,4 +1,4 @@
-# Real-time Stream Processor
+# Real-Time Stream Processor
 
 This sample demonstrates the use of AWS Lambda with AWS Kinesis and AWS DynamoDB to process real-time streaming data for click stream analysis.
 
