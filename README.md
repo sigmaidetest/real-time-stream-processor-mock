@@ -39,7 +39,7 @@ Click on the deployment button and it should deploy all the resources that are r
 
 After the deployment, you can test this sample application by sending an HTTP request to the created API Gateway (activity-stream-proxy). To find the endpoint URL, please follow these steps.
 
-1. Sign in to the AWS Management Console, and then open the API Gateway console at [link](https://console.aws.amazon.com/apigateway/ "Amazon API Gateway").
+1. Sign in to the AWS Management Console, and then open the API Gateway console at [https://console.aws.amazon.com/apigateway/](https://console.aws.amazon.com/apigateway/ "Amazon API Gateway").
 2. Make sure that you are signed in to the AWS region where you selected when creating the Sigma project.
 3. On the API Gateway page, in the APIs list, select "activity-stream-proxy" API.
 4. In the Stages navigation pane, expand the Prod stage, select POST on /report, and then copy the Invoke URL value in the format of https://{api-id}.execute-api.{region}.amazonaws.com/Prod/report.
@@ -67,7 +67,7 @@ After the deployment, you can test this sample application by sending an HTTP re
     }
 }
 ```
-7. Then, to check if the processing was executed successfully, in the AWS Management Console, open the DynamoDB console at [link](https://console.aws.amazon.com/dynamodb/ "DynamoDB").
+7. Then, to check if the processing was executed successfully, in the AWS Management Console, open the DynamoDB console at [https://console.aws.amazon.com/dynamodb/](https://console.aws.amazon.com/dynamodb/ "DynamoDB").
 8. In the Tables navigation pane under DynamoDB, select "click-stream-table" and go to items tab.
 9. Voila! There's the item with the values you sent inside the POST request body.
 
