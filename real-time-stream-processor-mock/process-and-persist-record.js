@@ -1,4 +1,3 @@
-let AWS = require('aws-sdk');
 /*
  * SLAppForge Sigma. Integrated Development Environment for Serverless Computing
  *
@@ -11,16 +10,17 @@ let AWS = require('aws-sdk');
  * If you have questions regarding the use of this file, please contact SLAppForge at info@slappforge.com
  */
 
+const AWS = require('aws-sdk');
 const ddb = new AWS.DynamoDB.DocumentClient();
 
 exports.handler = function (event, context, callback) {
-	console.log('Event:', event);
+	console.debug('Event:', event);
 
 	event.Records.forEach(record => {
-		console.log('Data:', record.kinesis.data);
+		
 		let request = JSON.parse(new Buffer(record.kinesis.data, 'base64').toString('ascii'));
 		let activity = JSON.parse(request);
-		console.log('Activity:', activity);
+		console.debug('Activity:', activity);
 
 		// Partition key and sort key should be non null values
 		if (activity.ip !== undefined && activity.timestamp !== undefined) {
@@ -39,36 +39,11 @@ exports.handler = function (event, context, callback) {
 				}
 			}, function (err, data) {
 				if (err) {
-					console.log('Response -> error:', err);
-					let response = {
-						'statusCode': err.statusCode,
-						'headers': {
-							'Access-Control-Allow-Origin': '*',
-							'Content-Type': 'application/json'
-						},
-						'body': {
-							'Code': err.code,
-							'Message': err.message
-						},
-						'isBase64Encoded': false
-					};
-					callback(null, response);
+					console.debug('Response -> error:', err);
+					callback(null, err.message);
 				} else {
-					console.log('Response -> data:', data);
-					let response = {
-						'statusCode': 200,
-						'headers': {
-							'Access-Control-Allow-Origin': '*',
-							'Content-Type': 'application/json'
-						},
-						'body': {
-							'Code': 'PutRecordSuccessful',
-							'Message': 'Record was successfully put to stream click-stream',
-							'data': JSON.stringify(data)
-						},
-						'isBase64Encoded': false
-					};
-					callback(null, response);
+					console.debug('Response -> data:', data);
+					callback(null, 'Record was successfully put to click-stream');
 				}
 			});
 
