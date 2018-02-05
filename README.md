@@ -1,6 +1,6 @@
 # Real-Time Stream Processor
 
-This sample demonstrates the use of AWS Lambda with AWS Kinesis and AWS DynamoDB to process real-time streaming data for click stream analysis.
+This sample demonstrates the use of AWS Lambda with AWS Kinesis and AWS DynamoDB to process real-time streaming data for clickstream analysis.
 
 ## Prerequisites
 
@@ -8,7 +8,7 @@ All the deployments of this application are based on Amazon AWS. To open the pro
 
 ## Usecase Description
 
-Today, more than ever, e-commerce applications leverage web-traffic data to boost their conversion rates. Click-stream analysis results play a huge role in deducing crucial marketing decisions. This samples demonstrates the use of related AWS services to create a basic real-time streaming data processor for click stream analysis.
+Today, more than ever, e-commerce applications leverage web-traffic data to boost their conversion rates. Click-stream analytics play a huge role in deducing crucial marketing decisions. This sample demonstrates the use of related AWS services to create a basic real-time streaming data processor for clickstream analysis.
 
 In this sample, activity records reported to a Kinesis Stream (click-stream) are fetched and validates if they are eligible to be used in click-stream analytics. An eligible sample record with the following JSON format is then inserted into a DynamoDB table (click-stream-table) for further processing.
 
@@ -29,7 +29,7 @@ To test this sample, another Lambda function is bundled, which exposes an API Ga
 
 ## Getting Started
 
-In order to get started you just have to open the sample project from the Sigma IDE and deploy it in your AWS account. Then, the IDE will get a clone of this repository and commit it to your own GitHub account to allow you to keep playing with the source code.
+In order to get started, you just have to open the sample project from the Sigma IDE and deploy it in your AWS account. Then, the IDE will get a clone of this repository and commit it to your own GitHub account to allow you to keep playing with the source code.
 
 ## Deployment
 
@@ -43,7 +43,7 @@ After the deployment, you can test this sample application by sending an HTTP re
 2. Make sure that you are signed in to the AWS region where you selected when creating the Sigma project.
 3. On the API Gateway page, in the APIs list, select "activity-stream-proxy" API.
 4. In the Stages navigation pane, expand the Prod stage, select POST on /report, and then copy the Invoke URL value in the format of https://{api-id}.execute-api.{region}.amazonaws.com/Prod/report.
-5. Now, send an HTTP POST request to the endpoint you found in the earlier step with a sample JSON payload as follows .
+5. Now, send an HTTP POST request to the endpoint you found in the earlier step with a sample JSON payload as follows.
 ```json
 {
     "ip": "0.0.0.0",
